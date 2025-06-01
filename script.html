@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GIT-CHEATs Click Cheat</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff5ec;
+      color: #333;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      border: 2px solid #ffd8ae;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff7a00;
+      margin-bottom: 10px;
+    }
+
+    p.description {
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 320px;
+      font-family: monospace;
+      font-size: 14px;
+      background-color: #fff8f2;
+      border: 1px solid #ffcfaa;
+      border-radius: 8px;
+      padding: 12px;
+      resize: none;
+      color: #333;
+    }
+
+    button {
+      margin-top: 20px;
+      display: block;
+      background-color: #ff9933;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button:hover {
+      background-color: #e57e00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GIT-CHEATs Clicker Game Cheat</h1>
+    <p class="description">GIT-CHEATs is a fast, easy JavaScript cheat for clicker games. Select any button as the target, choose how many clicks (100 to 10,000), and automate rapid clicking. The minimal popup keeps it simple—perfect for speeding up gameplay without any setup or distractions.</p>
+    
+    <textarea id="code" readonly>
+(function () {
+  let clickTarget = null;
+  let interval = null;
+
+  const cheatBtn = document.createElement("button");
+  cheatBtn.innerText = "GIT-CHEATs";
+  cheatBtn.style.position = "fixed";
+  cheatBtn.style.top = "10px";
+  cheatBtn.style.left = "50%";
+  cheatBtn.style.transform = "translateX(-50%)";
+  cheatBtn.style.zIndex = 9999;
+  cheatBtn.style.padding = "10px 20px";
+  cheatBtn.style.fontSize = "16px";
+  document.body.appendChild(cheatBtn);
+
+  const popup = document.createElement("div");
+  popup.style.position = "fixed";
+  popup.style.top = "50%";
+  popup.style.left = "50%";
+  popup.style.transform = "translate(-50%, -50%)";
+  popup.style.background = "#fff";
+  popup.style.color = "#000";
+  popup.style.padding = "20px";
+  popup.style.border = "1px solid #000";
+  popup.style.borderRadius = "4px";
+  popup.style.zIndex = 10000;
+  popup.style.display = "none";
+  popup.style.textAlign = "center";
+  document.body.appendChild(popup);
+
+  const statusText = document.createElement("div");
+  statusText.style.marginBottom = "10px";
+  popup.appendChild(statusText);
+
+  const amounts = [100, 500, 1000, 10000];
+  const buttonContainer = document.createElement("div");
+  amounts.forEach(amount => {
+    const btn = document.createElement("button");
+    btn.innerText = \`\${amount}\`;
+    btn.style.margin = "5px";
+    btn.style.padding = "8px 16px";
+    btn.onclick = () => {
+      if (!clickTarget) {
+        alert("No button selected. Click your game's button first.");
+        return;
+      }
+      startClicking(amount);
+      popup.style.display = "none";
+    };
+    buttonContainer.appendChild(btn);
+  });
+
+  popup.appendChild(buttonContainer);
+
+  const closeBtn = document.createElement("button");
+  closeBtn.innerText = "Close";
+  closeBtn.style.marginTop = "10px";
+  closeBtn.style.padding = "5px 10px";
+  closeBtn.onclick = () => popup.style.display = "none";
+  popup.appendChild(closeBtn);
+
+  cheatBtn.onclick = () => {
+    updateStatus();
+    popup.style.display = "block";
+  };
+
+  document.addEventListener("click", function (e) {
+    if (e.target === cheatBtn || popup.contains(e.target)) return;
+    if (e.target.tagName === "BUTTON") {
+      clickTarget = e.target;
+      updateStatus();
+    }
+  });
+
+  function updateStatus() {
+    statusText.innerText = clickTarget
+      ? \`Target set: "\${clickTarget.innerText}"\`
+      : \`No button selected. Click your game's button to set it.\`;
+  }
+
+  function startClicking(amount) {
+    let count = 0;
+    const clicksPerTick = 50;
+    if (interval) clearInterval(interval);
+    interval = setInterval(() => {
+      if (count >= amount) {
+        clearInterval(interval);
+        interval = null;
+        return;
+      }
+      for (let i = 0; i < clicksPerTick && count < amount; i++) {
+        simulateClick(clickTarget);
+        count++;
+      }
+    }, 1);
+  }
+
+  function simulateClick(el) {
+    if (!el) return;
+    const evt = new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+    el.dispatchEvent(evt);
+  }
+})();
+    </textarea>
+
+    <button onclick="copyCode()">Copy Code</button>
+  </div>
+
+  <script>
+    function copyCode() {
+      const codeBox = document.getElementById("code");
+      codeBox.select();
+      codeBox.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("Code copied to clipboard!");
+    }
+  </script>
+</body>
+</html>
