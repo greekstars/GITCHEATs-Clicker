@@ -80,6 +80,7 @@
   let clickTarget = null;
   let interval = null;
 
+  // GIT-CHEATs Button
   const cheatBtn = document.createElement("button");
   cheatBtn.innerText = "GIT-CHEATs";
   cheatBtn.style.position = "fixed";
@@ -91,6 +92,7 @@
   cheatBtn.style.fontSize = "16px";
   document.body.appendChild(cheatBtn);
 
+  // Popup
   const popup = document.createElement("div");
   popup.style.position = "fixed";
   popup.style.top = "50%";
@@ -106,15 +108,17 @@
   popup.style.textAlign = "center";
   document.body.appendChild(popup);
 
+  // Status display
   const statusText = document.createElement("div");
   statusText.style.marginBottom = "10px";
   popup.appendChild(statusText);
 
+  // Amount buttons
   const amounts = [100, 500, 1000, 10000];
   const buttonContainer = document.createElement("div");
   amounts.forEach(amount => {
     const btn = document.createElement("button");
-    btn.innerText = \`\${amount}\`;
+    btn.innerText = `${amount}`;
     btn.style.margin = "5px";
     btn.style.padding = "8px 16px";
     btn.onclick = () => {
@@ -130,6 +134,7 @@
 
   popup.appendChild(buttonContainer);
 
+  // Close button
   const closeBtn = document.createElement("button");
   closeBtn.innerText = "Close";
   closeBtn.style.marginTop = "10px";
@@ -142,6 +147,7 @@
     popup.style.display = "block";
   };
 
+  // Button selector logic
   document.addEventListener("click", function (e) {
     if (e.target === cheatBtn || popup.contains(e.target)) return;
     if (e.target.tagName === "BUTTON") {
@@ -152,8 +158,8 @@
 
   function updateStatus() {
     statusText.innerText = clickTarget
-      ? \`Target set: "\${clickTarget.innerText}"\`
-      : \`No button selected. Click your game's button to set it.\`;
+      ? `Target set: "${clickTarget.innerText}"`
+      : `No button selected. Click your game's button to set it.`;
   }
 
   function startClicking(amount) {
@@ -183,6 +189,7 @@
     el.dispatchEvent(evt);
   }
 })();
+
     </textarea>
 
     <button onclick="copyCode()">Copy Code</button>
